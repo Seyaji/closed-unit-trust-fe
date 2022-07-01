@@ -1,10 +1,6 @@
 import { css } from "@emotion/react";
 
 export const GlobalStyles = css`
-  @font-face {
-    font-family: 'Roboto', sans-serif;
-    src: url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
-  }
   * {
     box-sizing: border-box;
   }
@@ -25,8 +21,5 @@ export const GlobalStyles = css`
     font-family: 'Inconsolata', monospace;
   }
 
-  li {
-    font-family: 'Inconsolata', monospace;
-  }
   
 `;

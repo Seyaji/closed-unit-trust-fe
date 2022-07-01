@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
+import Metamask from './Metamask/MetamaskConnect'
 
 
 const NavStyle = styled.div`
@@ -14,13 +15,18 @@ const NavStyle = styled.div`
 
   nav ul {
     margin: 0;
-    padding: 0;
+    padding: 1rem;
     list-style-type: none;
     display: flex;
     align-items: center;
     flex-flow: row wrap;
     justify-content: center;
     column-gap: 2rem;
+
+    li {
+      font-family: 'Inconsolata', monospace;
+      font-weight: 500;
+    }
   }
 `
 
@@ -31,13 +37,11 @@ export const Nav: React.FC = () => {
       <nav id="NavMenu">
         <ul>
           <li><a>Home</a></li>
-          <li><a>Market</a></li>
+          <li><a>Buy Units</a></li>
           <li><a>Fund Breakdown</a></li>
         </ul>
       </nav>
-      <div id="Profile">
-        <p>connect metamask</p>
-      </div>
+      <Metamask />
     </NavStyle>
   )
 }

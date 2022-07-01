@@ -1,7 +1,7 @@
-# 🚀 Welcome to your new awesome project!
+# 🚀 Unit Trust Contract Front End
 
-This project has been created using **webpack-cli**, you can now run
 
+## to build bundle the application: 
 ```
 npm run build
 ```
@@ -12,4 +12,26 @@ or
 yarn build
 ```
 
-to bundle your application
+## to run the application in local host:
+
+```
+npm run start
+```
+
+or
+
+```
+yarn start
+```
+
+## to run the unit tests
+
+```
+npm run test
+```
+
+or
+
+```
+yarn test
+```

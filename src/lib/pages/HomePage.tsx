@@ -1,9 +1,12 @@
 import React from 'react'
+import { Contract } from '../components/Contract'
+import { Page } from '../styles/Page'
 
 export const HomePage = () => {
   return (
-    <div>
-      <h1>Hello, world!</h1>
-    </div>
+    <Page>
+      <h1>Test</h1>
+      <Contract />
+    </Page>
   );
 }
