@@ -1,4 +1,6 @@
 import '@emotion/react'; // it's important to use ThemeProvider
+import { MetaMaskInpageProvider } from "@metamask/providers";
+import { ethers } from 'ethers'
 
 declare module '@emotion/react' {
   export interface Theme {
@@ -11,4 +13,10 @@ declare module '@emotion/react' {
         text: string;
     }
   }
+}
+declare global {
+  interface Window {
+    ethereum: MetaMaskInpageProvider;
+  }
+  
 }
