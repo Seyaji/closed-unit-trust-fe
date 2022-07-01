@@ -1,10 +1,12 @@
 import React from 'react';
-import { Nav } from './components/Nav';
-import { Main } from './styles/Main';
 import { ThemeProvider, withTheme, Theme, useTheme } from '@emotion/react'
 import { Global } from "@emotion/react";
 import { GlobalStyles } from './styles/global'
 import { darkTheme, lightTheme } from './styles/theme'
+
+import { Nav } from './components/Nav';
+import { Main } from './styles/Main';
+import { HomePage } from './pages/HomePage';
 
 
 
@@ -14,11 +16,9 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <Main>
-        <Global styles={GlobalStyles} />
         <Nav />
-        <div>
-          <h1>Test</h1>
-        </div>
+        <Global styles={GlobalStyles} />
+        <HomePage />
       </Main>
     </ThemeProvider>
   );
