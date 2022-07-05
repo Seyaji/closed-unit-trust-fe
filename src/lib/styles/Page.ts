@@ -1,7 +1,9 @@
-import React from 'react';
-import styled from '@emotion/styled'
+import React from "react";
+import styled from "@emotion/styled";
 
-export const Page = styled.div`
-    padding-left: 3rem;
-    padding-right: 3rem;
-    `
+const Page = styled.div`
+  padding-left: 3rem;
+  padding-right: 3rem;
+`;
+
+export default Page

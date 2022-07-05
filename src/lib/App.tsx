@@ -5,8 +5,11 @@ import { GlobalStyles } from './styles/global'
 import { darkTheme, lightTheme } from './styles/theme'
 
 import { Nav } from './components/Nav';
-import { Main } from './styles/Main';
-import { HomePage } from './pages/HomePage';
+import Main from './styles/Main';
+import Page from './styles/Page';
+import HomePage from './pages/HomePage';
+import InvestorPage from './pages/Investor';
+import Contract from './components/contract/Contract';
 
 
 
@@ -19,6 +22,10 @@ export default function App() {
         <Nav />
         <Global styles={GlobalStyles} />
         <HomePage />
+        <Page>
+          <Contract />
+          <InvestorPage />
+        </Page>
       </Main>
     </ThemeProvider>
   );
