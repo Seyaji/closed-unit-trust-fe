@@ -19,5 +19,6 @@ export const Button = styled.div<Button>`
   :hover {
     background-color: ${({ theme }) => theme.colors.text};
     color: ${({ theme }) => theme.colors.background};
+    cursor: pointer;
   }
 `

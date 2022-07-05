@@ -51,8 +51,9 @@ export const getInvestor = async () => {
     const { ethereum } = window;
     if (ethereum) {
       const connectedContract = getContract(ethereum)
-      const getInvestor = await connectedContract.getInvestor('0x4A079D4417b522762C72dB9643234FCC4683a40E');
+      const getInvestor: Investor = await connectedContract.getInvestor('0x4A079D4417b522762C72dB9643234FCC4683a40E');
       console.log('investor: ', getInvestor)
+      return getInvestor
     } else {
       console.log("Ethereum object doesn't exist!");
     }
@@ -132,7 +133,7 @@ export const closeUnitTrust = async () => {
   }
 }
 
-export const Contract: React.FC = () => {
+export default function Contract() {
   const [totalUnits, setTotalUnits] = useState<bigint | string>('')
   const [remainingUnits, setRemainingUnits] = useState<bigint | string>('')
 
