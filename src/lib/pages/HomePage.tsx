@@ -1,5 +1,5 @@
 import React from 'react'
-import { Contract } from '../components/Contract'
+import { Contract } from '../components/contract/Contract'
 import { Page } from '../styles/Page'
 
 export const HomePage = () => {
