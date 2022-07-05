@@ -26,6 +26,11 @@ const NavStyle = styled.div`
     li {
       font-family: 'Inconsolata', monospace;
       font-weight: 500;
+      :hover {
+        color: ${({ theme }) => theme.colors.bold};
+        text-decoration: underline;
+        cursor: pointer;
+      }
     }
   }
 `

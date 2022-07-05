@@ -1,12 +1,14 @@
 import React from 'react'
-import { Contract } from '../components/contract/Contract'
-import { Page } from '../styles/Page'
+import Page from '../styles/Page'
+import Splash from '../components/Splash'
 
-export const HomePage = () => {
+export default function HomePage() {
   return (
-    <Page>
-      <h1>Test</h1>
-      <Contract />
-    </Page>
+    <>
+      <Splash />
+      <Page>
+        <h1>Home Page</h1>
+      </Page>
+    </>
   );
 }
