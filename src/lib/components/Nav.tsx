@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import Metamask from './Metamask/MetamaskConnect'
+import Metamask from './metamask/MetamaskConnect'
 
 
 const NavStyle = styled.div`

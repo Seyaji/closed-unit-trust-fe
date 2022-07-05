@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ethers } from "ethers";
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
-import { contractAddress } from "../contract"
+import { contractAddress } from "../contract/Contract"
 
 const Metamask: React.FC = () => {
 
@@ -31,6 +31,8 @@ const Metamask: React.FC = () => {
       setErrorMessage("Install MetaMask");
     }
   };
+
+  connectHandler()
 
   const accountsChanged = async (newAccount: SignerWithAddress) => {
     setAccount(newAccount);
@@ -62,8 +64,7 @@ const Metamask: React.FC = () => {
 
   return (
     <div>
-      {account !== "" ? <p>Balance: {balance} ETH</p> : <Connect />}
-      
+      {account !== "" ? <p>Balance: { balance } ETH</p> : <Connect />}
     </div>
   );
 }
