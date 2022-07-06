@@ -1,5 +1,5 @@
 import React from 'react';
-import { ThemeProvider, withTheme, Theme, useTheme } from '@emotion/react'
+import { ThemeProvider, Theme } from '@emotion/react'
 import { Global } from "@emotion/react";
 import { GlobalStyles } from './styles/global'
 import { darkTheme, lightTheme } from './styles/theme'
@@ -18,8 +18,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <Nav />
       <Global styles={theme => GlobalStyles} />
-      <HomePage />
-          <InvestorPage />
+        <InvestorPage />
         <Page>
           <Contract />
         </Page>
