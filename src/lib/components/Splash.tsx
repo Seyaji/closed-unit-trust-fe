@@ -7,8 +7,9 @@ const SplashBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
   height: 30vh;
+  width: 100%;
+  overflow: hidden;
   background-color: ${({ theme }) => theme.colors.secondary};
 `
 
