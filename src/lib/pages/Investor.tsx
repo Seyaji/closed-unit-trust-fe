@@ -164,7 +164,7 @@ export default function InvestorPage() {
             <input className="funcInputs" name='salePrice' onChange={handleChange} type="number" placeholder="Sale price" />
           </div>
           <div className="controls">
-            <Button className="funcButton" onClick={() => purchaseUnits(+state?.postUnits)}>Post to Market</Button>
+            <Button className="funcButton" onClick={() => postUnits(+state?.postUnits, state?.salePrice)}>Post to Market</Button>
           </div>
           <p>Total value: {+state?.postUnits * +state.salePrice || 0} Ether</p>
         </Func>
@@ -180,7 +180,7 @@ export default function InvestorPage() {
           </div>
           <div className="controls">
             <Button className="funcButton" onClick={async () => setInvestor(await getInvestor(state.marketAddress))}>Get Price</Button>
-            <Button className="funcButton" onClick={() => transferUnits(state.marketAddress, transferValue)}>Transfer</Button>
+            <Button className="funcButton" onClick={() => transferUnits(state.marketAddress, state.marketUnits, transferValue)}>Transfer</Button>
           </div>
           <p>Total value: { transferValue || 0} Ether</p>
         </Func>

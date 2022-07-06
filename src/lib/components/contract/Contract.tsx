@@ -122,12 +122,13 @@ export const postUnits = async (amount: number, salePrice: string) => {
   }
 }
 
-export const transferUnits = async (address: string, amount: number) => {
+export const transferUnits = async (address: string, amount: string, value: number) => {
   try {
     const { ethereum } = window;
+    const cost = `${value + 0.01}`
     if (ethereum) {
       const connectedContract = getContract(ethereum)
-      await connectedContract.transferUnit(address, ethers.utils.parseEther(`${amount}`));
+      await connectedContract.transferUnit(address, amount, { value: ethers.utils.parseEther(cost)});
     } else {
       console.log("Ethereum object doesn't exist!");
     }
