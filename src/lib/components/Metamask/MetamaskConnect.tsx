@@ -63,7 +63,7 @@ const Metamask: React.FC = () => {
   }
 
   return (
-    <div>
+    <div id='balance'>
       {account !== "" ? <p>Balance: { balance } ETH</p> : <Connect />}
     </div>
   );

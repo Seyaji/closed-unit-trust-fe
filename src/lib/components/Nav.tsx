@@ -29,6 +29,7 @@ const NavStyle = styled.div`
 
     #li {
       font-family: 'Inconsolata', monospace;
+      font-size: ${({ theme }) => theme.font.size.medium};
       font-weight: 500;
       text-decoration: none;
       color: ${({ theme }) => theme.colors.text};
@@ -37,6 +38,12 @@ const NavStyle = styled.div`
         text-decoration: underline;
         cursor: pointer;
       }
+    }
+  }
+
+  #balance {
+    @media screen and (max-width: 480px) {
+      display: none;
     }
   }
 `
