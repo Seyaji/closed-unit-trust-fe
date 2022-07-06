@@ -7,6 +7,7 @@ declare module '@emotion/react' {
     colors: {
         background: string;
         secondary: string;
+        highlight: string;
         bold: string;
         darkBold: string;
         light: string;
@@ -17,6 +18,19 @@ declare module '@emotion/react' {
 declare global {
   interface Window {
     ethereum: MetaMaskInpageProvider;
+  }
+  interface Investor {
+    authorized: boolean;
+    balance: {
+      _hex: string;
+      _isBigNumber: boolean;
+    };
+    ownedUnits: 0;
+    salePrice: {
+      _hex: string;
+      _isBigNumber: boolean;
+    };
+    saleUnits: number;
   }
   
 }

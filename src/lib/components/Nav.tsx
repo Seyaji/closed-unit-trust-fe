@@ -7,6 +7,7 @@ const NavStyle = styled.div`
   display: flex;
   justify-content: space-between;
   background-color: ${({ theme }) => theme.colors.background};
+  width: 100vw !important;
   padding-left: 3rem;
   padding-right: 3rem;
   align-items: center;

@@ -14,6 +14,19 @@ export const getContract = ( ethereum: MetaMaskInpageProvider ) => {
   return connectedContract;
 }
 
+export const getUnitPrice = async () => {
+  try {
+    const { ethereum } = window;
+    const connectedContract = getContract(ethereum)
+    const price = await connectedContract.getUnitPrice();
+    console.log(price);
+    return price;
+  }
+  catch (error) {
+    console.log(error);
+  }
+}
+
 export const getTotalUnits = async () => {
   try {
     const { ethereum } = window;
@@ -46,12 +59,28 @@ export const getRemainingUnits = async () => {
   }
 }
 
-export const getInvestor = async () => {
+export const getAccount = async () => {
   try {
     const { ethereum } = window;
     if (ethereum) {
       const connectedContract = getContract(ethereum)
-      const getInvestor: Investor = await connectedContract.getInvestor('0x4A079D4417b522762C72dB9643234FCC4683a40E');
+      const account: Investor = await connectedContract.getInvestor('0x4A079D4417b522762C72dB9643234FCC4683a40E');
+      console.log('account: ', account)
+      return account
+    } else {
+      console.log("Ethereum object doesn't exist!");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const getInvestor = async (address: string) => {
+  try {
+    const { ethereum } = window;
+    if (ethereum) {
+      const connectedContract = getContract(ethereum)
+      const getInvestor: Investor = await connectedContract.getInvestor(address);
       console.log('investor: ', getInvestor)
       return getInvestor
     } else {
@@ -151,7 +180,8 @@ export default function Contract() {
       <p>{`Total Units: ${totalUnits}`}</p>
       <p>{`Remaining Units: ${remainingUnits}`}</p>
       <Button onClick={() => getTotalUnits()}>Get Total Units</Button>
-      <Button onClick={() => getInvestor()}>Get Investor</Button>
+      <Button onClick={() => getAccount()}>Get Investor</Button>
+      <Button onClick={() => getUnitPrice()}>Get Unit Price</Button>
       <Button onClick={() => getRemainingUnits()}>Get Remaining Units</Button>
       <Button onClick={() => purchaseUnits(1)}>Purchase Units</Button>
       <Button onClick={() => postUnits(1, '1.10')}>Post Units</Button>
