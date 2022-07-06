@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ethers } from "ethers";
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
-import { contractAddress } from "../contract/Contract"
+import { Button } from '../../styles/components/ui'
 
 const Metamask: React.FC = () => {
 
@@ -58,7 +58,7 @@ const Metamask: React.FC = () => {
 
   const Connect = () => {
     return (
-      <button onClick={() => connectHandler()}>Connect Metamask</button>
+      <Button Small onClick={() => connectHandler()}>Connect Metamask</Button>
     )
   }
 
