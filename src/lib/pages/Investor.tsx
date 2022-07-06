@@ -12,7 +12,7 @@ import {
   investorWithdraw
 } from '../components/contract/Contract';
 import { connectedAccount } from '../components/metamask/utils';
-import { Button } from '../styles/components/ui';
+import { Button, Action } from '../styles/components/ui';
 import Page from '../styles/Page';
 
 const Actions = styled.div`
@@ -21,65 +21,7 @@ const Actions = styled.div`
   justify-content: center;
   flex-wrap: wrap;
 `
-const Func = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 1.5rem;
-  border: 1px solid ${({ theme }) => theme.colors.text};
-  justify-content: start;
-  border-radius: 5px;
-  margin: 1rem;
-  width: 300px;
-  height: 360px;
 
-  #funcHeading {
-    font-family: 'Roboto';
-    font-size: 1.5rem;
-  }
-
-  .accountDetails {
-    width: 70%;
-  }
-
-  #heading {
-    align-self: flex-start;
-  }
-
-  .inputs {
-    align-self: center;
-    width: 100%;
-  }
-
-  .controls {
-    display: flex;
-    flex-direction: row;
-    margin-top: auto;
-    justify-content: space-between;
-  }
-
-  #buttonDiv {
-  }
-
-  .funcInputs {
-    margin-bottom: 1rem;
-    font-size: 1rem;
-    padding: .5rem;
-    background-color: ${({ theme }) => theme.colors.secondary};
-    border: 1px solid ${({ theme }) => theme.colors.text};
-    border-radius: 5px;
-    color: ${({ theme }) => theme.colors.text};
-    width: 100%;
-
-    ::placeholder {
-    opacity: .5;
-    color: ${({ theme }) => theme.colors.text};
-    }
-  }
-
-  .funcButton {
-    justify-self: flex-end;
-  }
-`
 type State = {
   [key: string]: string
 }
@@ -126,7 +68,7 @@ export default function InvestorPage() {
 
   return (
     <Page>
-      <div className="accountDetails">
+      <div>
         {account ? (
           <>
             <h2>Account Details</h2>
@@ -139,65 +81,65 @@ export default function InvestorPage() {
       <br />
       <h2>Contract Actions</h2>
       <Actions>
-        <Func>
+        <Action>
           <div className="heading">
-            <span id="funcHeading">Buy Units</span>
+            <span id="actionHeading">Buy Units</span>
             {fundUnitPrice}
             <p>Available units: {remainingUnits}</p>
           </div>
           <div className="inputs">
-            <input className="funcInputs" name='buyUnits' onChange={handleChange} type="number" placeholder="Units to buy" />
+            <input className="actionInputs" name='buyUnits' onChange={handleChange} type="number" placeholder="Units to buy" />
           </div>
           <div className="controls">
-            <Button className="funcButton" onClick={() => purchaseUnits(+state?.buyUnits)}>Buy</Button>
+            <Button onClick={() => purchaseUnits(+state?.buyUnits)}>Buy</Button>
           </div>
-          <p>Total cost: {+state?.buyUnits * +unitPrice || 0} Ether</p>
-        </Func>
-        <Func>
+          <p>Total cost: <span className='highlight'> {+state?.buyUnits * +unitPrice || 0} Ether </span></p>
+        </Action>
+        <Action>
           <div className="heading">
-            <span id="funcHeading">Post Units For Sale</span>
+            <span id="actionHeading">Post Units For Sale</span>
             <p>Fund Unit price: {unitPrice} Ether</p>
             <p>Available Units: {account && account?.saleUnits} </p>
           </div>
           <div className="inputs">
-            <input className="funcInputs" name='postUnits' onChange={handleChange} type="number" placeholder="Number of units" />
-            <input className="funcInputs" name='salePrice' onChange={handleChange} type="number" placeholder="Sale price" />
+            <input className="actionInputs" name='postUnits' onChange={handleChange} type="number" placeholder="Number of units" />
+            <input className="actionInputs" name='salePrice' onChange={handleChange} type="number" placeholder="Sale price" />
           </div>
           <div className="controls">
-            <Button className="funcButton" onClick={() => postUnits(+state?.postUnits, state?.salePrice)}>Post to Market</Button>
+            <Button onClick={() => postUnits(+state?.postUnits, state?.salePrice)}>Post to Market</Button>
           </div>
-          <p>Total value: {+state?.postUnits * +state.salePrice || 0} Ether</p>
-        </Func>
-        <Func>
+          <p>Total value: <span className='highlight'> {+state?.postUnits * +state.salePrice || 0} Ether </span> </p>
+        </Action>
+        <Action>
           <div className="heading">
-            <span id="funcHeading">Buy Units From Market</span>
+            <span id="actionHeading">Buy Units From Market</span>
             <p>Unit price: {investor ? ethers.utils.formatEther(investor?.salePrice._hex) + ' Ether' : 'Enter Address'}</p>
-            <p>Available Units: {investor ? investor?.saleUnits : 'Enter Address'}</p>
+            <p>Available Units: {investor ? investor?.saleUnits : 0}</p>
           </div>
           <div className="inputs">
-            <input className="funcInputs" name='marketAddress' onChange={handleChange} type="string" placeholder="Address" />
-            <input className="funcInputs" name='marketUnits' onChange={handleChange} type="number" placeholder="Number of units" />
+            <input className="actionInputs" name='marketAddress' onChange={handleChange} type="string" placeholder="Address" />
+            <input className="actionInputs" name='marketUnits' onChange={handleChange} type="number" placeholder="Number of units" />
           </div>
           <div className="controls">
-            <Button className="funcButton" onClick={async () => setInvestor(await getInvestor(state.marketAddress))}>Get Price</Button>
-            <Button className="funcButton" onClick={() => transferUnits(state.marketAddress, state.marketUnits, transferValue)}>Transfer</Button>
+            <Button onClick={async () => setInvestor(await getInvestor(state.marketAddress))}>Get Price</Button>
+            <Button onClick={() => transferUnits(state.marketAddress, state.marketUnits, transferValue)}>Transfer</Button>
           </div>
-          <p>Total value: { transferValue || 0} Ether</p>
-        </Func>
-        <Func>
+          <p>Total value: <span className='highlight'>{transferValue || 0} Ether</span></p>
+        </Action>
+        <Action>
           <div className="heading">
-            <span id="funcHeading">Withdraw Balance</span>
+            <span id="actionHeading">Withdraw Balance</span>
             <p>Cleared Balance: {account && ethers.utils.formatEther(account?.balance._hex)}</p>
             <p>Withdraw cleared balance</p>
           </div>
           <div className="inputs">
-            <input className="funcInputs" name='withdrawAmount' onChange={handleChange} type="number" placeholder="Amount to withdraw" />
+            <input className="actionInputs" name='withdrawAmount' onChange={handleChange} type="number" placeholder="Amount to withdraw" />
           </div>
           <div className="controls">
-            <Button className="funcButton" onClick={() => investorWithdraw(state.withdrawAmount)}>Withdraw</Button>
+            <Button onClick={() => investorWithdraw(state.withdrawAmount)}>Withdraw</Button>
           </div>
-          <p>Withdrawing: {state.withdrawAmount || 0} Ether</p>
-        </Func>
+          <p>Withdrawing: <span className='highlight'> {state.withdrawAmount || 0} Ether </span></p>
+        </Action>
       </Actions>
     </Page>
   )
