@@ -7,6 +7,7 @@ const Page = styled.div`
   justify-content: center;
   align-content: center;
   width: 80%;
+  padding-top: 4em;
   margin: auto;
 `;
 

@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled'
 import { ethers } from 'ethers'
-import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
-import { getUnitPrice, getAccount, getInvestor, purchaseUnits, getRemainingUnits, transferUnits, postUnits } from '../components/contract/Contract';
+import {
+  getUnitPrice,
+  getAccount,
+  getInvestor,
+  purchaseUnits,
+  getRemainingUnits,
+  transferUnits,
+  postUnits,
+  investorWithdraw
+} from '../components/contract/Contract';
 import { connectedAccount } from '../components/metamask/utils';
 import { Button } from '../styles/components/ui';
 import Page from '../styles/Page';
@@ -28,7 +36,7 @@ const Func = styled.div`
     font-family: 'Roboto';
     font-size: 1.5rem;
   }
-  
+
   .accountDetails {
     width: 70%;
   }
@@ -86,6 +94,7 @@ export default function InvestorPage() {
   const [state, setState] = useState<State>({})
 
   const fundUnitPrice = <p>Fund Unit price: {unitPrice} Ether</p>
+  const transferValue = +state?.marketUnits * (investor && +ethers.utils.formatEther(investor.salePrice._hex))
 
   useEffect(() => {
     (async () => {
@@ -118,15 +127,15 @@ export default function InvestorPage() {
   return (
     <Page>
       <div className="accountDetails">
-      {account ? (
-        <>
-          <h2>Account Details</h2>
-          <p>Connected Account: {signer}</p>
-          <p>Cleared Balance: {ethers.utils.formatEther(account?.balance._hex)}</p>
-          <p>Owned Units: {account?.ownedUnits + account?.saleUnits}</p>
-          <p>Units for sale: {account?.saleUnits}</p>
-        </>) : (<h2>Account Not Connected</h2>)}
-        </div>
+        {account ? (
+          <>
+            <h2>Account Details</h2>
+            <p>Connected Account: {signer}</p>
+            <p>Cleared Balance: {ethers.utils.formatEther(account?.balance._hex)}</p>
+            <p>Owned Units: {account?.ownedUnits + account?.saleUnits}</p>
+            <p>Units for sale: {account?.saleUnits}</p>
+          </>) : (<h2>Account Not Connected</h2>)}
+      </div>
       <br />
       <h2>Contract Actions</h2>
       <Actions>
@@ -142,7 +151,7 @@ export default function InvestorPage() {
           <div className="controls">
             <Button className="funcButton" onClick={() => purchaseUnits(+state?.buyUnits)}>Buy</Button>
           </div>
-            <p>Total cost: {+state?.buyUnits * +unitPrice || 0} Ether</p>
+          <p>Total cost: {+state?.buyUnits * +unitPrice || 0} Ether</p>
         </Func>
         <Func>
           <div className="heading">
@@ -157,7 +166,7 @@ export default function InvestorPage() {
           <div className="controls">
             <Button className="funcButton" onClick={() => purchaseUnits(+state?.postUnits)}>Post to Market</Button>
           </div>
-            <p>Total value: {+state?.postUnits * +state.salePrice || 0} Ether</p>
+          <p>Total value: {+state?.postUnits * +state.salePrice || 0} Ether</p>
         </Func>
         <Func>
           <div className="heading">
@@ -171,9 +180,9 @@ export default function InvestorPage() {
           </div>
           <div className="controls">
             <Button className="funcButton" onClick={async () => setInvestor(await getInvestor(state.marketAddress))}>Get Price</Button>
-            <Button className="funcButton" onClick={() => purchaseUnits(+state?.postUnits)}>Buy</Button>
+            <Button className="funcButton" onClick={() => transferUnits(state.marketAddress, transferValue)}>Transfer</Button>
           </div>
-            <p>Total value: {+state?.postUnits * +state.salePrice || 0} Ether</p>
+          <p>Total value: { transferValue || 0} Ether</p>
         </Func>
         <Func>
           <div className="heading">
@@ -182,14 +191,12 @@ export default function InvestorPage() {
             <p>Withdraw cleared balance</p>
           </div>
           <div className="inputs">
-            <input className="funcInputs" name='marketAddress' onChange={handleChange} type="string" placeholder="Address" />
-            <input className="funcInputs" name='marketUnits' onChange={handleChange} type="number" placeholder="Number of units" />
+            <input className="funcInputs" name='withdrawAmount' onChange={handleChange} type="number" placeholder="Amount to withdraw" />
           </div>
           <div className="controls">
-            <Button className="funcButton" onClick={async () => setInvestor(await getInvestor(state.marketAddress))}>Get Price</Button>
-            <Button className="funcButton" onClick={() => purchaseUnits(+state?.postUnits)}>Buy</Button>
+            <Button className="funcButton" onClick={() => investorWithdraw(state.withdrawAmount)}>Withdraw</Button>
           </div>
-            <p>Withdrawing: {+state?.postUnits * +state.salePrice || 0} Ether</p>
+          <p>Withdrawing: {state.withdrawAmount || 0} Ether</p>
         </Func>
       </Actions>
     </Page>

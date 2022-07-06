@@ -13,6 +13,8 @@ const NavStyle = styled.div`
   align-items: center;
   color: ${({ theme }) => theme.colors.text};
   border-bottom: 1px solid ${({ theme }) => theme.colors.text};
+  position: fixed;
+  z-index: 100;
 
   nav ul {
     margin: 0;
