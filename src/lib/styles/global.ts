@@ -25,7 +25,7 @@ export const GlobalStyles = (theme) => `
   }
 
   p {
-    font-size: 1rem;
+    font-size: ${theme.font.size.medium};
   }
 
   div {

@@ -13,6 +13,13 @@ declare module '@emotion/react' {
         light: string;
         text: string;
     }
+    font: {
+      size: {
+          small: string;
+          medium: string;
+          large: string;
+      }
+  }
   }
 }
 declare global {

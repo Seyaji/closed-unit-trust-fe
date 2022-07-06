@@ -13,6 +13,13 @@ export const darkTheme: Theme = {
         light: '#A68AA1',
         text: '#04BFAD',
     },
+    font: {
+        size: {
+            small: '1rem',
+            medium: '1.2rem',
+            large: "1.5rem",
+        }
+    }
 }
 
 export const lightTheme: Theme = {
@@ -25,6 +32,13 @@ export const lightTheme: Theme = {
         light: '#A68AA1',
         text: '#04BFAD',
     },
+    font: {
+        size: {
+            small: '1rem',
+            medium: '1.2rem',
+            large: "1.5rem",
+        }
+    }
 }
 
 
