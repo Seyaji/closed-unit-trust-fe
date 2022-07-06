@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styled from '@emotion/styled'
 import Metamask from './metamask/MetamaskConnect'
 
@@ -26,9 +27,11 @@ const NavStyle = styled.div`
     justify-content: center;
     column-gap: 2rem;
 
-    li {
+    #li {
       font-family: 'Inconsolata', monospace;
       font-weight: 500;
+      text-decoration: none;
+      color: ${({ theme }) => theme.colors.text};
       :hover {
         color: ${({ theme }) => theme.colors.bold};
         text-decoration: underline;
@@ -44,9 +47,12 @@ export const Nav: React.FC = () => {
     <NavStyle>
       <nav id="NavMenu">
         <ul>
-          <li><a>Home</a></li>
-          <li><a>Buy Units</a></li>
-          <li><a>Fund Breakdown</a></li>
+          <li>
+            <Link id="li" to="/">Home</Link>
+          </li>
+          <li>
+            <Link id="li" to="/investor">Account</Link>
+          </li>
         </ul>
       </nav>
       <Metamask />
