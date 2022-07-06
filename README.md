@@ -10,7 +10,7 @@
 - market page for visualisation of sell and buy orders
 - unit tests for contract interactions
 - unit tests for component rendering 
-- recreate this as a mintable token
+- recreate this as a mintable token - seperate reopooo
 - a refferal page?
 - a contact page?
 
