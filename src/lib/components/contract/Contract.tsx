@@ -5,9 +5,9 @@ import UnitTrust from '../../abi/UnitTrust.json';
 import { Button } from '../../styles/components/ui'
 
 
-export const contractAddress = '0x4351238186022D54bF43AAC83a9fA4fFd2748778'
+export const contractAddress = '0x2582B38c522D776b4a68726e941617eCc3259241'
 
-export const getContract = ( ethereum: MetaMaskInpageProvider ) => {
+export const getContract = (ethereum: MetaMaskInpageProvider) => {
   const provider = new ethers.providers.Web3Provider(ethereum as any);
   const signer = provider.getSigner();
   const connectedContract: ethers.Contract = new ethers.Contract(contractAddress, UnitTrust.abi, signer);
@@ -95,9 +95,11 @@ export const purchaseUnits = async (amount: number) => {
   try {
     const { ethereum } = window;
     if (ethereum) {
+      const purchaseAmount = amount + 0.01
       const connectedContract = getContract(ethereum)
-      const options = {value: ethers.utils.parseEther("1.01")}
-      await connectedContract.purchaseUnit(1, options);
+      const options = { value: ethers.utils.parseEther(`${purchaseAmount}`) }
+      console.log('options: ', options)
+      await connectedContract.purchaseUnit(amount, options);
     } else {
       console.log("Ethereum object doesn't exist!");
     }
@@ -120,12 +122,12 @@ export const postUnits = async (amount: number, salePrice: string) => {
   }
 }
 
-export const transferUnits = async (address: string, amount: string) => {
+export const transferUnits = async (address: string, amount: number) => {
   try {
     const { ethereum } = window;
     if (ethereum) {
       const connectedContract = getContract(ethereum)
-      await connectedContract.transferUnit(address, ethers.utils.parseEther(amount));
+      await connectedContract.transferUnit(address, ethers.utils.parseEther(`${amount}`));
     } else {
       console.log("Ethereum object doesn't exist!");
     }
@@ -153,12 +155,12 @@ export const closeUnitTrust = async () => {
     const { ethereum } = window;
     if (ethereum) {
       const connectedContract = getContract(ethereum)
-      await connectedContract.closeUnitTrust(ethers.utils.parseEther("1.00"));
+      await connectedContract.closeUnitTrust(ethers.utils.parseEther("1.01"));
     } else {
       console.log("Ethereum object doesn't exist!");
     }
   } catch (error) {
-    console.log(error);``
+    console.log(error);
   }
 }
 
